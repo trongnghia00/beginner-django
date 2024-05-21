@@ -4,7 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def homepage(request):
-    return render(request, "appone/index.html")
+    data = {'name': 'Nghia'}
+    return render(request, "appone/index.html", data)
 
 def register(request):
     return render(request, "appone/register.html")

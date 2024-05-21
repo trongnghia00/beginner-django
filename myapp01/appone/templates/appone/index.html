@@ -5,4 +5,12 @@
 {% block content %}
     <h2>Homepage !!</h2>
     <p>Welcome to my website !</p>
+    <!-- <p>My name is {{ name }}</p> -->
+
+    {% if name == 'Nghia' %}
+        <h5>Hello Nghia</h5>
+    {% else %}
+        <h5>Access denied !</h5>
+    {% endif %}
+
 {% endblock %}
