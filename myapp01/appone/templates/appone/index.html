@@ -5,12 +5,19 @@
 {% block content %}
     <h2>Homepage !!</h2>
     <p>Welcome to my website !</p>
-    <!-- <p>My name is {{ name }}</p> -->
 
-    {% if name == 'Nghia' %}
-        <h5>Hello Nghia</h5>
-    {% else %}
-        <h5>Access denied !</h5>
-    {% endif %}
-
+    <table border="1" width="30%">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>City</th>
+        </tr>
+        {% for student in myList %}
+        <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.city }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

@@ -4,7 +4,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def homepage(request):
-    data = {'name': 'Nghia'}
+    studentList = [
+        {
+            'id': 1,
+            'name': 'Nghia',
+            'city': 'HCM'
+        },
+        {
+            'id': 2,
+            'name': 'Trong',
+            'city': 'BD'
+        },
+        {
+            'id': 3,
+            'name': 'Dinh',
+            'city': 'Hue'
+        }
+    ]
+    data = {'myList': studentList}
     return render(request, "appone/index.html", data)
 
 def register(request):
