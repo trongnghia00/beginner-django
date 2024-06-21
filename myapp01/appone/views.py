@@ -3,6 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 
+from .models import Task
+
 def homepage(request):
     studentList = [
         {
@@ -26,3 +28,8 @@ def homepage(request):
 
 def register(request):
     return render(request, "appone/register.html")
+
+def task(request):
+    queryDataAll = Task.objects.all()
+    context = {'allTasks' : queryDataAll}
+    return render(request, "appone/task.html", context)

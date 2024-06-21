@@ -1,0 +1,24 @@
+{% extends "appone/base.html" %}
+
+{% block title %}Task - App-one{% endblock %}
+
+{% block content %}
+    <h2>Task</h2>
+
+    <table border="1" width="75%">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date Created</th>
+        </tr>
+        {% for task in allTasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.created }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
