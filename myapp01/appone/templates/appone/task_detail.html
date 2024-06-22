@@ -1,0 +1,28 @@
+{% extends "appone/base.html" %}
+
+{% block title %}Task {{ singleTask.id }} detail - App-one{% endblock %}
+
+{% block content %}
+    <h2>Task</h2>
+    {% if singleTask.id == 0 %}
+    <h3>Task not found</h3>
+    {% else %}
+    <table border="1" width="75%">
+        <tr>
+            <th>ID</th>
+            <td>{{ singleTask.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ singleTask.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ singleTask.description }}</td>
+        <tr>
+            <th>Date Created</th>
+            <td>{{ singleTask.created }}</td>
+        </tr>
+    </table>
+    {% endif %}
+{% endblock %}

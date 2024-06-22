@@ -33,3 +33,11 @@ def task(request):
     queryDataAll = Task.objects.all()
     context = {'allTasks' : queryDataAll}
     return render(request, "appone/task.html", context)
+
+def task_detail(request, id) :
+    if Task.objects.filter(id=id).exists():
+        querySingleData = Task.objects.get(id=id)
+    else: 
+        querySingleData = {'id': 0}
+    context = {'singleTask' : querySingleData}
+    return render(request, "appone/task_detail.html", context)

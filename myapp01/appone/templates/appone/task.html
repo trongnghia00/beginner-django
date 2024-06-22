@@ -15,7 +15,7 @@
         {% for task in allTasks %}
         <tr>
             <td>{{ task.id }}</td>
-            <td>{{ task.title }}</td>
+            <td><a href="/task/{{ task.id }}">{{ task.title }}</a></td>
             <td>{{ task.description }}</td>
             <td>{{ task.created }}</td>
         </tr>
