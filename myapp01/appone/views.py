@@ -5,6 +5,8 @@ from django.http import HttpResponse
 
 from .models import Task
 
+from .forms import TaskForm
+
 def homepage(request):
     studentList = [
         {
@@ -41,3 +43,9 @@ def task_detail(request, id) :
         querySingleData = {'id': 0}
     context = {'singleTask' : querySingleData}
     return render(request, "appone/task_detail.html", context)
+
+def task_form(request):
+    # pass
+    form = TaskForm()
+    context = {'TaskForm': form}
+    return render(request, "appone/task_form.html", context)

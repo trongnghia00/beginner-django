@@ -1,0 +1,15 @@
+{% extends "appone/base.html" %}
+
+{% block title %}New Task - My Site{% endblock %}
+
+{% block content %}
+    <h2>Create your task</h2>
+    <p>Task Form</p>
+    <form method="post">
+        {% csrf_token %}
+        <!-- {{ TaskForm.title }}
+        {{ TaskForm.description }} -->
+         {{TaskForm.as_p}}
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

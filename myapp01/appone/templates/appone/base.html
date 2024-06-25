@@ -10,9 +10,10 @@
         <hr />
     </header>
     <nav>
-        <a href="/">Home</a>
-        <a href="/register/">Register</a>
-        <a href="/task/">All tasks</a>
+        <a href="{% url '' %}">Home</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'task' %}">All tasks</a>
+        <a href="{% url 'task_form' %}">New Task</a>
     </nav>
     <main>
         {% block content %}{% endblock %}
