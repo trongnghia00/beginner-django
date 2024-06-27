@@ -11,6 +11,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Date Created</th>
+            <th>Action</th>
         </tr>
         {% for task in allTasks %}
         <tr>
@@ -18,6 +19,7 @@
             <td><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></td>
             <td>{{ task.description }}</td>
             <td>{{ task.created }}</td>
+            <td><a href="{% url 'update_task' task.id %}">Update</a></td>
         </tr>
         {% endfor %}
     </table>

@@ -1,0 +1,12 @@
+{% extends "appone/base.html" %}
+
+{% block title %}Update Task - My Site{% endblock %}
+
+{% block content %}
+    <h2>Update your task</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{TaskForm.as_p}}
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 from .models import Task
 
@@ -54,3 +54,20 @@ def create_task(request):
         form = TaskForm()
     context = {'TaskForm': form}
     return render(request, "appone/create_task.html", context)
+
+def update_task(request, id):
+    if Task.objects.filter(id=id).exists():
+        task = Task.objects.get(id=id)
+    else: 
+        raise Http404("Task not found")
+    
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid() :
+            form.save()
+            return redirect('task')
+    else:
+        form = TaskForm(instance=task)
+    
+    context = {'TaskForm': form}
+    return render(request, "appone/update_task.html", context)
