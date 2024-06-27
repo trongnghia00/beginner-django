@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.http import HttpResponse
@@ -44,8 +44,13 @@ def task_detail(request, id) :
     context = {'singleTask' : querySingleData}
     return render(request, "appone/task_detail.html", context)
 
-def task_form(request):
-    # pass
-    form = TaskForm()
+def create_task(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('task')
+    else:
+        form = TaskForm()
     context = {'TaskForm': form}
-    return render(request, "appone/task_form.html", context)
+    return render(request, "appone/create_task.html", context)
