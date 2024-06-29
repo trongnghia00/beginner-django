@@ -71,3 +71,16 @@ def update_task(request, id):
     
     context = {'TaskForm': form}
     return render(request, "appone/update_task.html", context)
+
+def delete_task(request, id):
+    if Task.objects.filter(id=id).exists():
+        task = Task.objects.get(id=id)
+    else: 
+        raise Http404("Task not found")
+    
+    if request.method == 'POST':
+        task.delete()
+        return redirect('task')
+    
+    context = {'task': task}
+    return render(request, "appone/delete_task.html", context)

@@ -1,0 +1,13 @@
+{% extends "appone/base.html" %}
+
+{% block title %}Update Task - My Site{% endblock %}
+
+{% block content %}
+    <h2>Delete your task</h2>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Are you sure you want to delete "{{ task.title }}"</h3>
+        <input type="submit" value="Yes" />
+        <a href="{% url 'task' %}">Cancel</a>
+    </form>
+{% endblock %}
