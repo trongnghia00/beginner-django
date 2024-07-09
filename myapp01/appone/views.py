@@ -5,7 +5,9 @@ from django.http import HttpResponse, Http404
 
 from .models import Task
 
-from .forms import TaskForm, CreateUserForm
+from .forms import TaskForm, CreateUserForm, LoginForm
+
+from django.contrib.auth import authenticate, login
 
 def homepage(request):
     studentList = [
@@ -40,6 +42,27 @@ def register(request):
     context = {'RegisterForm': form}
 
     return render(request, "appone/register.html", context)
+
+def mylogin(request):
+    form = LoginForm()
+
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("dashboard")
+            
+    context = {'LoginForm': form}
+
+    return render(request, "appone/login.html", context)
+
+def dashboard(request):
+    return render(request, "appone/dashboard.html")
 
 def task(request):
     queryDataAll = Task.objects.all()

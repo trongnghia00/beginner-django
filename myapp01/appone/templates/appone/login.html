@@ -1,0 +1,13 @@
+{% extends "appone/base.html" %}
+
+{% block title %}Login - My Site{% endblock %}
+
+{% block content %}
+    <h2>Login here !!</h2>
+    <p>This is where you can login to your account.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ LoginForm.as_p }}
+        <input type="submit" value="Login" />
+    </form>
+{% endblock %}

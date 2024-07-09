@@ -14,9 +14,14 @@
     </header>
     <nav>
         <a href="{% url '' %}">Home</a>
-        <a href="{% url 'register' %}">Register</a>
         <a href="{% url 'task' %}">All tasks</a>
         <a href="{% url 'create_task' %}">New Task</a>
+        {% if user.is_authenticated %}
+        Hello {{ user.username }}
+        {% else %}
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     </nav>
     <main>
         {% block content %}{% endblock %}
