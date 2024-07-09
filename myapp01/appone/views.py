@@ -5,7 +5,7 @@ from django.http import HttpResponse, Http404
 
 from .models import Task
 
-from .forms import TaskForm
+from .forms import TaskForm, CreateUserForm
 
 def homepage(request):
     studentList = [
@@ -29,7 +29,17 @@ def homepage(request):
     return render(request, "appone/index.html", data)
 
 def register(request):
-    return render(request, "appone/register.html")
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('User created')
+    
+    context = {'RegisterForm': form}
+
+    return render(request, "appone/register.html", context)
 
 def task(request):
     queryDataAll = Task.objects.all()

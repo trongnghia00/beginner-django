@@ -5,4 +5,9 @@
 {% block content %}
     <h2>Register here !!</h2>
     <p>This is where you can create your account.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ RegisterForm.as_p }}
+        <input type="submit" value="Create Account" />
+    </form>
 {% endblock %}
