@@ -7,7 +7,8 @@ from .models import Task
 
 from .forms import TaskForm, CreateUserForm, LoginForm
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 def homepage(request):
     studentList = [
@@ -61,8 +62,13 @@ def mylogin(request):
 
     return render(request, "appone/login.html", context)
 
+@login_required
 def dashboard(request):
     return render(request, "appone/dashboard.html")
+
+def userLogout(request):
+    logout(request)
+    return redirect("")
 
 def task(request):
     queryDataAll = Task.objects.all()

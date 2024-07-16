@@ -5,4 +5,6 @@
 {% block content %}
     <h2>Dashboard</h2>
     <p>User Infomation</p>
+    Hello {{ user.username }} 
+    <a href="{% url 'logout' %}">Logout</a>
 {% endblock %}
