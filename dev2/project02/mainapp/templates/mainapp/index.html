@@ -1,4 +1,35 @@
-{% load static %}
-<h1>Home page</h1>
-
-<img src="{% static 'images/mypic.jpg' %}" width="300px" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://bootswatch.com/5/morph/bootstrap.css" rel="stylesheet">
+    <title>Trang chủ</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+        <a class="navbar-brand main-heading">             
+            &nbsp; Vườn Tâm Hồn
+        </a>
+        <div class="navbar-collapse text-center">
+            <ul class="navbar-nav ms-auto">
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a class="btn btn-primary navbar-btn" type="button"  href="">Đăng ký</a>
+                </li>
+                &nbsp;&nbsp;&nbsp; 
+                <li class="nav-item">
+                    <a class="btn btn-primary navbar-btn" type="button"  href="">Đăng nhập</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+            </ul>
+        </div>
+    </nav>
+    <br /><br />
+    <div class="text-center">
+        <h2>Nơi tâm hồn bạn tìm về bình yên và lắng đọng</h2>
+        <br />
+        <a class="btn btn-outline-primary" type="button"  href="">Đăng ký</a>
+    </div>
+</body>
+</html>
