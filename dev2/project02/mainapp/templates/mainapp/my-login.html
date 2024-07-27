@@ -1,20 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://bootswatch.com/5/morph/bootstrap.css" rel="stylesheet">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet">
     <title>Vườn Tâm Hồn - Đăng nhập</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Đăng nhập vào hệ thống</h1>
-        
+    <br />
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h1>Đăng nhập</h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Đăng nhập</button>
+            <br />
+            <button class="btn btn-secondary w-100 btn-block p-2"  type="submit">Đăng nhập</button>
         </form>
     </div>
+    <br />
 </body>
 </html>
