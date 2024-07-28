@@ -4,6 +4,8 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from django.contrib import messages
+
 # Create your views here.
 
 def homepage(request):
@@ -15,6 +17,7 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Tài khoản được tạo thành công !")
             return redirect('login')
     context = {'form': form}
     return render(request, "mainapp/register.html", context)
