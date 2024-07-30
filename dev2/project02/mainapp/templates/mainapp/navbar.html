@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://bootswatch.com/5/morph/bootstrap.css" rel="stylesheet">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet">
+    <title>Vườn Tâm Hồn - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+        <a class="navbar-brand main-heading">             
+            &nbsp; Vườn Tâm Hồn
+        </a>
+        <div class="navbar-collapse text-center">
+            <ul class="navbar-nav ml-auto">
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-link">
+                    <a class="nav-link" href="{% url "dashboard" %}">Bảng điều khiển</a>
+                </li>
+                &nbsp;&nbsp;&nbsp; 
+                <li class="nav-link">
+                    <a class="nav-link" href="">Chia sẻ suy nghĩ</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-link">
+                    <a class="nav-link" href="">Xem các chia sẻ</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+            </ul>
+        </div>
+    </nav>
+    <br />
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
