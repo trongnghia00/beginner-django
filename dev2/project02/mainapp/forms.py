@@ -9,7 +9,21 @@ from .models import Thought
 class ThoughtForm(ModelForm):
     class Meta:
         model = Thought
-        fields = '__all__'
+        fields = ['title', 'content']
+        labels = {
+            'title': 'Tiêu đề',
+            'content': 'Nội dung',
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nhập tiêu đề', 
+            }),
+            'content': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nhập nội dung', 
+            }),
+        }
 
 class CreateUserForm(UserCreationForm):
     username = forms.CharField(
