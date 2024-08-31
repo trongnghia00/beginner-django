@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
+from .models import Thought
+
 # Create your views here.
 
 def homepage(request):
@@ -59,3 +61,11 @@ def create_thought(request):
     context = {'form' : form}
 
     return render(request, 'mainapp/create-thought.html', context)
+
+@login_required(login_url='login')
+def my_thoughts(request):
+    current_user = request.user.id # Lấy id của user hiện hành
+    thoughts = Thought.objects.all().filter(user=current_user)
+
+    context = {'Thoughts': thoughts}
+    return render(request, "mainapp/my-thoughts.html", context)

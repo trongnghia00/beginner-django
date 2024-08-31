@@ -1,0 +1,18 @@
+{% extends "mainapp/navbar.html" %}
+
+{% block title %}Suy nghĩ của tôi{% endblock title %}
+
+{% block content %}
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h1>Các suy nghĩ của tôi</h1>
+        {% for thought in Thoughts %}
+            <div class="card bg-secondary mb-3">
+                <div class="card-header">{{thought.title}}</div>
+                <div class="card-body">
+                  <h4 class="card-title">{{thought.content}}</h4>
+                  <p class="card-text">{{thought.date_posted}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
