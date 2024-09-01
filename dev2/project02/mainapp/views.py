@@ -69,3 +69,18 @@ def my_thoughts(request):
 
     context = {'Thoughts': thoughts}
     return render(request, "mainapp/my-thoughts.html", context)
+
+@login_required(login_url='login')
+def update_thought(request, id):
+    thought = Thought.objects.get(id=id)
+    form = ThoughtForm(instance=thought)
+
+    if request.method == 'POST':
+        form = ThoughtForm(request.POST, instance=thought)
+        if form.is_valid():
+            form.save()
+            return redirect('my-thoughts')
+        
+    context = {'form': form}
+
+    return render(request, "mainapp/update-thought.html", context)

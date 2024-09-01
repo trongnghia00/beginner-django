@@ -10,4 +10,5 @@ urlpatterns = [
 
     path('create-thought', views.create_thought, name='create-thought'),
     path('my-thoughts', views.my_thoughts, name='my-thoughts'),
+    path('update-thought/<str:id>', views.update_thought, name='update-thought'),
 ]
