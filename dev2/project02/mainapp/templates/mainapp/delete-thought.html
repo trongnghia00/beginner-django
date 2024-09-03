@@ -1,0 +1,17 @@
+{% extends "mainapp/navbar.html" %}
+
+{% block title %}Xóa chia sẻ{% endblock title %}
+
+{% block content %}
+
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h1>Xóa chia sẻ</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>Bạn có chắc xóa chia sẻ <strong class="text-success-emphasis">{{thought.title}}</strong> ?</p>
+            <br />
+            <button class="btn btn-outline-danger w-100 btn-block p-2" type="submit">Xóa</button> &nbsp;
+            <a href="{% url "my-thoughts" %}" class="btn btn-outline-primary w-100 btn-block p-2">Quay lại</a>
+        </form>
+    </div>
+{% endblock content %}

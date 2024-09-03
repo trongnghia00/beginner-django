@@ -88,3 +88,17 @@ def update_thought(request, id):
     context = {'form': form}
 
     return render(request, "mainapp/update-thought.html", context)
+
+@login_required(login_url='login')
+def delete_thought(request, id):
+    try:
+        thought = Thought.objects.get(id=id, user=request.user)
+    except:
+        return redirect("my-thoughts")
+
+    if request.method == 'POST' :
+        thought.delete()
+        return redirect('my-thoughts')
+    
+    context = {'thought': thought}
+    return render(request, "mainapp/delete-thought.html", context)
