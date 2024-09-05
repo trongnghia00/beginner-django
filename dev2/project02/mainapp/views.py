@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import CreateUserForm, LoginForm, ThoughtForm
+from .forms import CreateUserForm, LoginForm, ThoughtForm, UpdateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -102,3 +102,16 @@ def delete_thought(request, id):
     
     context = {'thought': thought}
     return render(request, "mainapp/delete-thought.html", context)
+
+@login_required(login_url='login')
+def update_profile(request):
+    form = UpdateUserForm(instance=request.user)
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        
+    context = {'form': form}
+
+    return render(request, "mainapp/update-profile.html", context)

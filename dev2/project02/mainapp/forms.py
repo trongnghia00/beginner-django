@@ -97,3 +97,23 @@ class LoginForm(AuthenticationForm):
             'class': 'form-control'
         })
     )
+
+class UpdateUserForm(forms.ModelForm):
+    password = None # Không cập nhật password
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'form-control',
+                'readonly': 'readonly',
+            }),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nhập nội dung', 
+            }),
+        }
+        help_texts = {
+            'username': '',
+        }

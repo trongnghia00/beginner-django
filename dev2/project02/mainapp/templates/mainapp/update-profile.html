@@ -1,0 +1,16 @@
+{% extends "mainapp/navbar.html" %}
+
+{% block title %}Cập nhật hồ sơ{% endblock title %}
+
+{% block content %}
+
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h1>Cập nhật hồ sơ</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br />
+            <button class="btn btn-secondary w-100 btn-block p-2"  type="submit">Cập nhật</button>
+        </form>
+    </div>
+{% endblock content %}
