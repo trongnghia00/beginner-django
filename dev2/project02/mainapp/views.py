@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .models import Thought
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -115,3 +116,12 @@ def update_profile(request):
     context = {'form': form}
 
     return render(request, "mainapp/update-profile.html", context)
+
+@login_required(login_url='login')
+def delete_account(request):
+    if request.method == 'POST':
+        deleteUser = User.objects.get(username=request.user)
+        deleteUser.delete()
+        return redirect("")
+
+    return render(request, "mainapp/delete-account.html")

@@ -14,4 +14,5 @@ urlpatterns = [
     path('thought/delete/<str:id>', views.delete_thought, name='delete-thought'),
     
     path('profile/update', views.update_profile, name='update-profile'),
+    path('profile/delete', views.delete_account, name='delete-account'),
 ]
