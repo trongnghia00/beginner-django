@@ -1,0 +1,44 @@
+<h2>Kết quả Ma trận AHP</h2>
+
+<table border="1">
+    <tr>
+        <th>Tiêu chí</th>
+        {% for crit in keys %}
+            <th>{{ crit }}</th>
+        {% endfor %}
+    </tr>
+    {% for key, row in table_data %}
+    <tr>
+        <td>{{ key }}</td>
+        {% for value in row %}
+            <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Trọng số cuối cùng cho các tiêu chí:</h2>
+<ul>
+    {% for crit, weight in weights.items %}
+        <li>{{ crit }}: {{ weight }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Danh Mục Đầu Tư Gợi ý</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Tên Danh Mục</th>
+            <th>Trọng Số (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for investment, weight in investments %}
+            <tr>
+                <td>{{ investment }}</td>
+                <td>{{ weight }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br /><br /><br />
