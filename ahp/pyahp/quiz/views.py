@@ -71,53 +71,90 @@ def objective_function(allocation, df, weights):
         total_score += score * allocation[i]
     return total_score
 
-def genetic_algorithm(df, weights, population_size=20, generations=1000, mutation_rate=0.1):
-    # Khởi tạo quần thể
+def MVO_algorithm(df, weights, population_size=20, generations=1000, mutation_rate=0.1):
+    # Khởi tạo quần thể vũ trụ
     population = np.random.dirichlet(np.ones(len(df)), population_size)
 
     for _ in range(generations):
-        # Đánh giá quần thể
+        # Đánh giá các vũ trụ
         scores = np.array([objective_function(individual, df, weights) for individual in population])
-        # Chọn cha mẹ
+        
         parents_indices = scores.argsort()[-population_size // 2:]
         parents = population[parents_indices]
 
-        # Giao phối
         offspring = []
         for _ in range(population_size // 2):
             p1, p2 = parents[np.random.choice(len(parents), 2, replace=False)]
-            child = (p1 + p2) / 2  # Giao phối đơn giản
+            child = (p1 + p2) / 2
             offspring.append(child)
 
-        # Đột biến
         for i in range(len(offspring)):
             if np.random.rand() < mutation_rate:
                 mutation_value = np.random.uniform(-0.05, 0.05, size=len(df))
                 offspring[i] = np.clip(offspring[i] + mutation_value, 0, None)
-                offspring[i] /= offspring[i].sum()  # Đảm bảo tổng bằng 1
+                offspring[i] /= offspring[i].sum() 
 
-        # Tạo thế hệ mới
+        # Tạo các vũ trụ mới
         population = np.vstack((parents, offspring))
 
-    # Đánh giá thế hệ cuối cùng
+    # Đánh giá vũ trụ tốt nhất
     final_scores = np.array([objective_function(individual, df, weights) for individual in population])
     best_index = final_scores.argmax()
     best_allocation = population[best_index]
 
     return best_allocation
 
+# def calculate_ahp_matrix(weights):
+#     criteria = list(weights.keys())
+#     matrix = np.zeros((len(criteria), len(criteria)))
+
+#     for i, crit1 in enumerate(criteria):
+#         for j, crit2 in enumerate(criteria):
+#             if i == j:
+#                 matrix[i][j] = 1
+#             else:
+#                 matrix[i][j] = weights[crit1] / weights[crit2]
+
+#     return matrix
+
 def calculate_ahp_matrix(weights):
+    # Danh sách tiêu chí và các trọng số
     criteria = list(weights.keys())
-    matrix = np.zeros((len(criteria), len(criteria)))
+    original_weights = list(weights.values())
+    
+    # Tìm giá trị trọng số nhỏ nhất và lớn nhất
+    min_weight = min(original_weights)
+    max_weight = max(original_weights)
+
+    # Chuẩn hóa trọng số về khoảng từ 1 đến 9
+    scaled_weights = {
+        crit: 1 + ((weight - min_weight) * 8) / (max_weight - min_weight)
+        for crit, weight in weights.items()
+    }
+
+    # Khởi tạo ma trận AHP
+    matrix = np.zeros((len(criteria), len(criteria)), dtype=float)
 
     for i, crit1 in enumerate(criteria):
         for j, crit2 in enumerate(criteria):
+            if i < j:
+                continue
             if i == j:
-                matrix[i][j] = 1
+                matrix[i][j] = 1  # Đường chéo chính luôn là 1
             else:
-                matrix[i][j] = weights[crit1] / weights[crit2]
+                # Tính tỷ lệ giữa trọng số của hai tiêu chí
+                ratio = scaled_weights[crit1] / scaled_weights[crit2]
+                
+                # Làm tròn tỷ lệ về giá trị từ 1 đến 9
+                if ratio > 1:
+                    matrix[i][j] = min(round(ratio), 9)
+                    matrix[j][i] = 1 / matrix[i][j]
+                else:
+                    ratio_inv = min(round(1 / ratio), 9)
+                    matrix[i][j] = ratio_inv
+                    matrix[j][i] = 1 / matrix[i][j]
 
-    return matrix
+    return matrix, scaled_weights
 
 def quiz_view(request):
     if request.method == 'POST':
@@ -132,15 +169,15 @@ def quiz_view(request):
                     adjusted_weights[key] += value
 
             # Tính toán ma trận AHP
-            ahp_matrix = calculate_ahp_matrix(adjusted_weights)
+            ahp_matrix, adjusted_weights = calculate_ahp_matrix(adjusted_weights)
 
             # Chuyển ma trận AHP thành dạng bảng dễ hiển thị
             ahp_matrix_table = np.round(ahp_matrix, 2).tolist()
             weight_keys = list(adjusted_weights.keys())
             table_data = list(zip(weight_keys, ahp_matrix_table))
 
-            # Thực hiện GA
-            best_allocation = genetic_algorithm(df, initial_weights)
+            # Thực hiện MVO
+            best_allocation = MVO_algorithm(df, adjusted_weights)
 
             # Kết quả
             results = pd.DataFrame({
