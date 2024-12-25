@@ -6,7 +6,10 @@
 
     <div class="container bg-white shadow-md p-5 form-layout">
         <h1>Bảng điều khiển</h1>
-        Đang đăng nhập: <strong class="text-success-emphasis">{{user}}</strong> <br /><br />
+        Đang đăng nhập: <strong class="text-success-emphasis">{{user}}</strong> 
+        <br /><br />
+        <img style="width:100px;" src="{{profilePic.profile_pic.url}}" />
+        <br /><br />
         <a href="{% url "logout" %}">Đăng xuất</a>
     </div>
 {% endblock content %}

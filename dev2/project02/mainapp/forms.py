@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
 
 from django.forms import ModelForm
-from .models import Thought
+from .models import Thought, Profile
 
 class ThoughtForm(ModelForm):
     class Meta:
@@ -117,3 +117,16 @@ class UpdateUserForm(forms.ModelForm):
         help_texts = {
             'username': '',
         }
+
+class UpdateProfileForm(forms.ModelForm):
+    profile_pic = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'class': 'form-control-file'
+            }
+        )
+    )
+    class Meta:
+        model = Profile
+        fields = ['profile_pic',]
+        

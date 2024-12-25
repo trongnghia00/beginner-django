@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 
-from .forms import CreateUserForm, LoginForm, ThoughtForm, UpdateUserForm
+from .forms import CreateUserForm, LoginForm, ThoughtForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
-from .models import Thought
+from .models import Thought, Profile
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -19,7 +19,10 @@ def register(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            current_user = form.save(commit=False) # Tạo đối tượng User từ form nhưng chưa lưu
+            form.save() # Lưu đối tượng User vào cơ sở dữ liệu
+            profile = Profile.objects.create(user=current_user) # Tạo Profile liên kết với User
+
             messages.success(request, "Tài khoản được tạo thành công !")
             return redirect('login')
     context = {'form': form}
@@ -46,7 +49,9 @@ def user_logout(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, "mainapp/dashboard.html")
+    profile_pic = Profile.objects.get(user=request.user)
+    context = {'profilePic': profile_pic}
+    return render(request, "mainapp/dashboard.html", context)
 
 @login_required(login_url='login')
 def create_thought(request):
