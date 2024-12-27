@@ -122,7 +122,7 @@ class UpdateProfileForm(forms.ModelForm):
     profile_pic = forms.ImageField(
         widget=forms.FileInput(
             attrs={
-                'class': 'form-control-file'
+                'class': 'form-control'
             }
         )
     )

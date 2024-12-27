@@ -8,9 +8,19 @@
         <h1>Cập nhật hồ sơ</h1>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ UserUpdateForm.as_p }}
             <br />
             <button class="btn btn-secondary w-100 btn-block p-2"  type="submit">Cập nhật</button>
+        </form>
+    </div>
+    <br />
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h1>Cập nhật ảnh đại diện</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ ProfileUpdateForm.as_p }}
+            <br />
+            <button class="btn btn-secondary w-100 btn-block p-2"  type="submit">Tải lên</button>
         </form>
     </div>
     <br />
