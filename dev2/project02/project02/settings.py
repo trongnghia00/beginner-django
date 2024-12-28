@@ -98,7 +98,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "vi"
 
 TIME_ZONE = "UTC"
 
@@ -120,3 +120,14 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = 'True'
+EMAIL_PORT = '587'
+
+EMAIL_HOST_USER = 'xxxx.xxxx.xxxx.xxxx996@gmail.com' # Gmail Email
+EMAIL_HOST_PASSWORD = 'your app password !'
+
+DEFAULT_FROM_EMAIL = 'xxxx.xxxx.xxxx.xxxx996@gmail.com'

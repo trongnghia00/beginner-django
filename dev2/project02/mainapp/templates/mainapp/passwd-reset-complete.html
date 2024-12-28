@@ -1,0 +1,10 @@
+{% extends "mainapp/navbar.html" %}
+
+{% block title %}Reset Password{% endblock title %}
+
+{% block content %}
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h3>Đã cập nhật mật khẩu</h3>
+        <p>Bạn có thể <a href="{% url "login" %}">đăng nhập</a> vào tài khoản với mật khẩu mới.</p>
+    </div>
+{% endblock content %}

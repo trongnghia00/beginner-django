@@ -1,0 +1,16 @@
+{% extends "mainapp/navbar.html" %}
+
+{% block title %}Reset Password{% endblock title %}
+
+{% block content %}
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h3>Nhập mật khẩu mới</h3>
+        <p>Hãy nhập mật khẩu mới 2 lần !!!</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br /><br />
+            <button class="btn btn-secondary w-100 btn-block p-2"  type="submit">Cập nhật mật khẩu</button>
+        </form>
+    </div>
+{% endblock content %}

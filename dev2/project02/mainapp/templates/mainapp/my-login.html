@@ -24,9 +24,11 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
+            <a href="{% url "password_reset" %}">Quên mật khẩu ?</a>
             <br />
             <button class="btn btn-secondary w-100 btn-block p-2"  type="submit">Đăng nhập</button>
         </form>
+        
     </div>
     <br />
 
