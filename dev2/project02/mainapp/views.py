@@ -9,6 +9,9 @@ from django.contrib import messages
 from .models import Thought, Profile
 from django.contrib.auth.models import User
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 # Create your views here.
 
 def homepage(request):
@@ -21,6 +24,9 @@ def register(request):
         if form.is_valid():
             current_user = form.save(commit=False) # Tạo đối tượng User từ form nhưng chưa lưu
             form.save() # Lưu đối tượng User vào cơ sở dữ liệu
+
+            send_mail("Chào mừng đến Vườn Tâm Hồn", "Chúc mừng bạn tạo tài khoản thành công", settings.DEFAULT_FROM_EMAIL, [current_user.email])
+
             profile = Profile.objects.create(user=current_user) # Tạo Profile liên kết với User
 
             messages.success(request, "Tài khoản được tạo thành công !")
